@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
 interface formData {
-  name: string;
+  username: string;
   password: string;
 }
 
@@ -57,9 +57,7 @@ function Login() {
 
   return (
     <main className="bg-black text-white flex flex-col items-center justify-evenly h-screen">
-      <h1 className="text-4xl font-[Gugi] text-center top-(50%) left-(50%)">
-        CHARTER BOX
-      </h1>
+      <h1 className="text-4xl font-[Gugi] text-center">CHARTER BOX</h1>
       <form
         className="flex flex-col gap-4 w-[380px]"
         onSubmit={handleSubmit(onSubmit)}
@@ -70,6 +68,7 @@ function Login() {
             Username
           </label>
           <input
+            {...register("username")}
             type="text"
             id="Username"
             name="Username"
@@ -79,7 +78,6 @@ function Login() {
                 ? "border-white"
                 : "border-red-700")
             }
-            {...register("username")}
           />
           <div className="h-5 text-red-700">
             {typeof errors.username === "undefined"
@@ -92,6 +90,7 @@ function Login() {
             Password
           </label>
           <input
+            {...register("password")}
             type="text"
             id="password"
             name="password"
@@ -101,7 +100,6 @@ function Login() {
                 ? "border-white"
                 : "border-red-700")
             }
-            {...register("password")}
           />
           <div className="h-5 text-red-700">
             {typeof errors.password === "undefined"
