@@ -91,7 +91,7 @@ function Login() {
           </label>
           <input
             {...register("password")}
-            type="text"
+            type="password"
             id="password"
             name="password"
             className={

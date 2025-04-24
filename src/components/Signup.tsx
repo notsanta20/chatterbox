@@ -14,7 +14,7 @@ const schema = z
   .object({
     username: z
       .string()
-      .min(3, { message: "Username must be 3 or more characters long" }),
+      .min(3, { message: "username need to be at least 3 characters" }),
     password: z
       .string()
       .min(8, { message: "Password must be 8 or more characters long" }),
@@ -45,6 +45,7 @@ function Signup() {
       headers: { Authorization },
     };
     const url = "http://localhost:3000";
+    console.log(data);
 
     axios
       .post(`${url}/signup`, data, header)
@@ -57,7 +58,9 @@ function Signup() {
         if (message === `username already exists`) {
           setError("username", { message: message });
         } else {
-          setError("password", { message: "Internal server error, try again" });
+          setError("confirmPass", {
+            message: "Internal server error, try again",
+          });
         }
       });
   }
@@ -98,7 +101,7 @@ function Signup() {
           </label>
           <input
             {...register("password")}
-            type="text"
+            type="password"
             id="password"
             name="password"
             className={
@@ -120,7 +123,7 @@ function Signup() {
           </label>
           <input
             {...register("confirmPass")}
-            type="text"
+            type="password"
             id="confirmPass"
             name="confirmPass"
             className={
