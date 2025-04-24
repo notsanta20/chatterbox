@@ -45,7 +45,6 @@ function Signup() {
       headers: { Authorization },
     };
     const url = "http://localhost:3000";
-    console.log(data);
 
     axios
       .post(`${url}/signup`, data, header)
@@ -74,14 +73,14 @@ function Signup() {
       >
         <h2 className="text-center font-semibold text-2xl">SIGN UP</h2>
         <div className="flex flex-col gap-3 text-lg">
-          <label htmlFor="Username" className="px-4">
+          <label htmlFor="username" className="px-4">
             Username
           </label>
           <input
             {...register("username")}
             type="text"
-            id="Username"
-            name="Username"
+            id="username"
+            name="username"
             className={
               "border-2 rounded-4xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
