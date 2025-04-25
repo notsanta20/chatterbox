@@ -1,12 +1,37 @@
-function Message({ messages }: { messages: Array<object> | null }) {
-  function NoMessage() {
-    return <h2>No messages, say Hi.</h2>;
+function Message({
+  messages,
+  receiver,
+}: {
+  messages: Array<object> | null;
+  receiver: string;
+}) {
+  function EmptyPage() {
+    return <h2>Start chatting</h2>;
   }
 
   function Chat() {
     if (messages) {
       if (messages.length > 0) {
-        return <div></div>;
+        return (
+          <ul className="w-full">
+            {messages.map((m) => (
+              <li key={m.id} className="flex flex-col">
+                {m.senderId !== receiver && (
+                  <p className="self-end p-4 rounded-4xl bg-(--light-gray) text-(--text-gray)">
+                    {m.message}
+                  </p>
+                )}
+                {m.senderId === receiver && (
+                  <p className="self-start p-4 rounded-4xl bg-(--light-gray) text-(--text-gray)">
+                    {m.message}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        );
+      } else {
+        return <h2>No messages, say Hi.</h2>;
       }
     }
   }
@@ -15,8 +40,8 @@ function Message({ messages }: { messages: Array<object> | null }) {
     return (
       <section className="flex flex-col p-3">
         <div className="border-b-2 border-(--text-gray)">Profile Header</div>
-        <div className="p-2 flex-1">
-          {messages.length === 0 ? <NoMessage /> : <Chat />}
+        <div className="p-2 flex-1 flex justify-center items-center">
+          {messages.length === 0 ? <EmptyPage /> : <Chat />}
         </div>
         <div className="message">
           <input

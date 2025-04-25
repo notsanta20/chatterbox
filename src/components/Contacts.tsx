@@ -22,7 +22,7 @@ function Contacts({
                 <img src="/assets/chat-dark.svg" alt="" />
               </div>
               <div className="flex flex-col">
-                <h2 className="text-lg">c.username</h2>
+                <h2 className="text-lg">{c.username}</h2>
                 <p className="text-(--text-gray) line-clamp-1">
                   last message on chat
                 </p>

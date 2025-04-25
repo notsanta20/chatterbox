@@ -8,7 +8,7 @@ import Message from "./Message";
 function ChatRoom() {
   const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
-  const [receiver, setReceiver] = useState<string>("");
+  const [receiver, setReceiver] = useState<string>("empty");
   const [messages, setMessages] = useState<Array<object> | null>(null);
 
   const url = "http://localhost:3000";
@@ -31,11 +31,13 @@ function ChatRoom() {
 
   useEffect(() => {
     axios
-      .get(`${url}/message:${receiver}`, header)
+      .get(`${url}/message/${receiver}`, header)
       .then((res) => {
         setMessages(res.data.data);
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.log(err);
+      });
   }, [receiver]);
 
   function messageBox(id: string) {
@@ -52,7 +54,7 @@ function ChatRoom() {
         <Header />
         <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
           <Contacts contacts={data.data} messageBox={messageBox} />
-          <Message messages={messages} />
+          <Message messages={messages} receiver={receiver} />
         </section>
       </main>
     );
