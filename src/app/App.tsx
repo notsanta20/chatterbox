@@ -1,9 +1,8 @@
 import { Routes, Route } from "react-router";
-import Index from "../components/index";
+import Index from "../components/Index";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
-import Header from "../components/Header";
-import Room from "../components/Room";
+import ChatRoom from "../components/ChatRoom";
 
 function App() {
   return (
@@ -11,9 +10,7 @@ function App() {
       <Route path="/" element={<Index />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/room" element={<Header />}>
-        <Route index element={<Room />} />
-      </Route>
+      <Route path="/chatroom" element={<ChatRoom />} />
     </Routes>
   );
 }

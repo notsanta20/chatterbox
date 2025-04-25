@@ -42,7 +42,7 @@ function Login() {
       .post(`${url}/login`, data, header)
       .then((res) => {
         localStorage.setItem("authToken", res.data.token);
-        navigate("/room", { replace: true });
+        navigate("/chatroom", { replace: true });
       })
       .catch((err) => {
         const message = err.response.data.error;
