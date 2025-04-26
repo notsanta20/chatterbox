@@ -23,16 +23,16 @@ function Message({
     if (messages) {
       if (messages.length > 0) {
         return (
-          <ul className="w-full h-full flex flex-col p-3">
+          <ul className="w-full h-full flex flex-col gap-3 p-3">
             {messages.map((m) => (
               <li key={m.id} className="flex flex-col">
                 {m.senderId !== receiver && (
-                  <p className="self-end p-4 rounded-4xl bg-(--light-gray) text-(--text-gray)">
+                  <p className="self-end p-4 rounded-3xl bg-(--light-gray) text-(--text-gray)">
                     {m.message}
                   </p>
                 )}
                 {m.senderId === receiver && (
-                  <p className="self-start p-4 rounded-4xl bg-(--light-gray) text-(--text-gray)">
+                  <p className="self-start p-4 rounded-3xl bg-(--dark-Yellow) text-(--text-gray)">
                     {m.message}
                   </p>
                 )}

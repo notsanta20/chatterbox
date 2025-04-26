@@ -8,6 +8,7 @@ import Message from "./Message";
 function ChatRoom() {
   const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
+  const [render, setRender] = useState<number>(0);
   const [receiver, setReceiver] = useState<string>("empty");
   const [messages, setMessages] = useState<Array<object> | null>(null);
 
@@ -27,7 +28,7 @@ function ChatRoom() {
       .catch((error) => {
         setData(error.data);
       });
-  }, []);
+  }, [render]);
 
   useEffect(() => {
     axios
@@ -51,7 +52,7 @@ function ChatRoom() {
   } else {
     return (
       <main className="flex flex-col bg-(--gray) text-white h-screen">
-        <Header />
+        <Header setRender={setRender} />
         <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
           <Contacts contacts={data.data} messageBox={messageBox} />
           <Message messages={messages} receiver={receiver} />

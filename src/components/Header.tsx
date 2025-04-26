@@ -1,7 +1,11 @@
 import { Link } from "react-router";
 
-function Header() {
-  function logout() {}
+function Header({ setRender }) {
+  function logout() {
+    localStorage.setItem("authToken", "");
+    const num = Math.floor(Math.random() * 100);
+    setRender(num);
+  }
 
   return (
     <header className="flex items-center gap-2 bg-black text-white p-3">
