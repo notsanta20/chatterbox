@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+interface users {
+  id: string;
+  username: string;
+  profile: string | null;
+}
+
 function AddContact() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const [data, setData] = useState<Array<object> | null>(null);
+  const [data, setData] = useState<Array<users> | null>(null);
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
@@ -23,14 +29,18 @@ function AddContact() {
   }, []);
 
   function openModal() {
-    dialogRef.current.showModal();
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
   }
 
   function closeModal() {
-    dialogRef.current.close();
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
   }
 
-  function addContact(id) {
+  function addContact(id: string) {
     closeModal();
     const data = {
       contactId: id,

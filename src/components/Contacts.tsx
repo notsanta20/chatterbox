@@ -1,4 +1,5 @@
 import AddContact from "./AddContact";
+import AddGroup from "./AddGroup";
 
 interface message {
   id: string;
@@ -10,8 +11,8 @@ interface message {
 interface contact {
   id: string;
   username: string;
-  bio: string;
-  profile: string;
+  bio: string | null;
+  profile: string | null;
 }
 
 interface contacts {
@@ -59,7 +60,7 @@ function Contacts({
       </div>
       <div className="grid grid-cols-2 text-center cursor-pointer font-semibold">
         <AddContact />
-        <div>Add Group</div>
+        <AddGroup />
       </div>
     </section>
   );
