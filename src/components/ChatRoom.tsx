@@ -9,16 +9,21 @@ function ChatRoom() {
   const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
   const [refresh, setRefresh] = useState<number>(0);
-  const [receiver, setReceiver] = useState<string>("Initial");
+  const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<Array<object> | null>(null);
-
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {
     headers: { Authorization },
   };
-
+  const split = receiverId.split(" ");
+  let newURL = url + "/message";
+  let newId = receiverId;
+  if (split.length > 1) {
+    newURL = url + "/grp-msg";
+    newId = split[1];
+  }
   useEffect(() => {
     axios
       .get(`${url}/contacts`, header)
@@ -32,17 +37,17 @@ function ChatRoom() {
 
   useEffect(() => {
     axios
-      .get(`${url}/message/${receiver}`, header)
+      .get(`${newURL}/${newId}`, header)
       .then((res) => {
         setMessages(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [receiver, refresh]);
+  }, [receiverId, refresh]);
 
   function messageBox(id: string) {
-    setReceiver(id);
+    setReceiverId(id);
   }
 
   if (data === null) {
@@ -57,7 +62,7 @@ function ChatRoom() {
           <Contacts contacts={data.data} messageBox={messageBox} />
           <Message
             messages={messages}
-            receiver={receiver}
+            receiver={receiverId}
             setRefresh={setRefresh}
           />
         </section>

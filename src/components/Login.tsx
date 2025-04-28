@@ -35,8 +35,6 @@ function Login() {
     axios
       .post(`${url}/login`, data)
       .then((res) => {
-        console.log(res);
-
         localStorage.setItem("authToken", res.data.token);
         navigate("/chatroom", { replace: true });
       })
