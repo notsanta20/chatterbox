@@ -8,8 +8,8 @@ import Message from "./Message";
 function ChatRoom() {
   const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
-  const [render, setRender] = useState<number>(0);
-  const [receiver, setReceiver] = useState<string>("empty");
+  const [refresh, setRefresh] = useState<number>(0);
+  const [receiver, setReceiver] = useState<string>("Initial");
   const [messages, setMessages] = useState<Array<object> | null>(null);
 
   const url = "http://localhost:3000";
@@ -28,7 +28,7 @@ function ChatRoom() {
       .catch((error) => {
         setData(error.data);
       });
-  }, [render]);
+  }, [refresh]);
 
   useEffect(() => {
     axios
@@ -39,7 +39,7 @@ function ChatRoom() {
       .catch((err) => {
         console.log(err);
       });
-  }, [receiver]);
+  }, [receiver, refresh]);
 
   function messageBox(id: string) {
     setReceiver(id);
@@ -52,10 +52,14 @@ function ChatRoom() {
   } else {
     return (
       <main className="flex flex-col bg-(--gray) text-white h-screen">
-        <Header setRender={setRender} />
+        <Header setRender={setRefresh} />
         <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
           <Contacts contacts={data.data} messageBox={messageBox} />
-          <Message messages={messages} receiver={receiver} />
+          <Message
+            messages={messages}
+            receiver={receiver}
+            setRefresh={setRefresh}
+          />
         </section>
       </main>
     );

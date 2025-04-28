@@ -1,10 +1,29 @@
 import { useState, useEffect, useRef } from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+
+const schema = z.object({
+  groupName: z
+    .string()
+    .min(2, { message: "Group name must be at least 2 characters" }),
+});
 
 function AddGroup() {
   const [data, setData] = useState<Array<object> | null>(null);
+  const [refresh, setRefresh] = useState<number>(0);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const groupDialogRef = useRef<HTMLDialogElement | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
+
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
@@ -16,12 +35,12 @@ function AddGroup() {
     axios
       .get(`${url}/groups`, header)
       .then((res) => {
-        console.log(res.data.data);
+        setData(res.data.data);
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  }, [refresh]);
 
   function openModal() {
     if (dialogRef.current) {
@@ -35,7 +54,18 @@ function AddGroup() {
     }
   }
 
-  function joinGroup() {}
+  function joinGroup(id: string) {
+    const data = {
+      groupId: id,
+    };
+    axios
+      .post(`${url}/join-grp`, data, header)
+      .then((res) => {})
+      .catch((error) => {
+        console.log(error.response);
+      });
+    closeModal();
+  }
 
   function openGroupModal() {
     if (groupDialogRef.current) {
@@ -49,7 +79,19 @@ function AddGroup() {
     }
   }
 
-  function createGroup() {}
+  function onSubmit(data) {
+    axios
+      .post(`${url}/create-grp`, data, header)
+      .then((res) => {
+        console.log(res.data);
+        const num = Math.floor(Math.random() * 100);
+        setRefresh(num);
+        closeGroupModal();
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
 
   return (
     <div>
@@ -58,7 +100,7 @@ function AddGroup() {
       </button>
       <dialog
         ref={dialogRef}
-        className="bg-(--mid-gray) text-white border-1 border-(--light-gray) rounded-2xl w-[30vw] h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+        className="bg-(--mid-gray) text-white border-1 border-(--light-gray) rounded-2xl w-[30vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
         <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
           <button
@@ -67,7 +109,28 @@ function AddGroup() {
           >
             Create Group
           </button>
-          <ul className="w-full flex-1 flex flex-col gap-3"></ul>
+          <ul className="w-full flex-1 flex flex-col gap-3">
+            {data &&
+              data.map((d) => (
+                <li
+                  className="flex items-center gap-3 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray)  hover:bg-(--white-gray) py-2 px-4 "
+                  key={d.id}
+                >
+                  <div className="w-[35px] h-[35px]">
+                    <img src="/assets/chat.svg" alt="profile picture" />
+                  </div>
+                  <h2 className="flex-1 text-left">{d.name}</h2>
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => {
+                      joinGroup(d.id);
+                    }}
+                  >
+                    Join Group
+                  </button>
+                </li>
+              ))}
+          </ul>
           <button
             onClick={closeModal}
             className="cursor-pointer py-2 px-6 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray) hover:bg-(--white-gray)"
@@ -81,18 +144,24 @@ function AddGroup() {
         className="bg-(--mid-gray) text-white border-1 border-(--light-gray) rounded-2xl w-[30vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
         <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
-          <form className="flex-1 flex flex-col gap-5">
-            <div className="text-xl">Enter Group name</div>
+          <form
+            className="flex-1 flex flex-col gap-2 min-w-[300px]"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="text-md">Enter Group name</div>
             <input
+              {...register("groupName")}
               type="text"
-              name="name"
-              id="name"
+              name="groupName"
+              id="groupName"
               className="rounded-2xl py-2 px-4 outline-none border-2 border-(--light-gray)"
             />
-            <button
-              onClick={createGroup}
-              className="cursor-pointer py-2 px-6 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray) hover:bg-(--white-gray)"
-            >
+            <div className="text-red-700 text-sm h-[20px]">
+              {typeof errors.groupName === "undefined"
+                ? " "
+                : errors.groupName.message}
+            </div>
+            <button className="cursor-pointer py-2 px-6 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray) hover:bg-(--white-gray)">
               Create Group
             </button>
           </form>

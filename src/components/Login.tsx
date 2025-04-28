@@ -30,17 +30,13 @@ function Login() {
   });
 
   async function onSubmit(data: formData) {
-    const token = localStorage.getItem("authToken");
-    const Authorization = `Bearer ${token}`;
-    const header = {
-      headers: { Authorization },
-    };
-
     const url = "http://localhost:3000";
 
     axios
-      .post(`${url}/login`, data, header)
+      .post(`${url}/login`, data)
       .then((res) => {
+        console.log(res);
+
         localStorage.setItem("authToken", res.data.token);
         navigate("/chatroom", { replace: true });
       })

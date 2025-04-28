@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 
-function Header({ setRender }) {
+function Header({ setRender }: { setRender: Function }) {
   function logout() {
-    localStorage.setItem("authToken", "");
+    localStorage.setItem("authToken", " ");
     const num = Math.floor(Math.random() * 100);
     setRender(num);
   }
