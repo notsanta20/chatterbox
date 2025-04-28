@@ -30,8 +30,19 @@ function AddContact() {
     dialogRef.current.close();
   }
 
-  function addContact() {
+  function addContact(id) {
     closeModal();
+    const data = {
+      contactId: id,
+    };
+    axios
+      .post(`${url}/contacts`, data, header)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   return (
@@ -41,24 +52,37 @@ function AddContact() {
       </button>
       <dialog
         ref={dialogRef}
-        className="bg-(--light-gray) text-white rounded-2xl p-3  "
+        className="bg-(--mid-gray) text-white border-1 border-(--light-gray) rounded-2xl w-[30vw] h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
-        <div className="flex flex-col gap-3 items-center w-[30vw] h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
           <ul className="w-full flex-1 flex flex-col gap-3">
             {data &&
               data.map((m) => (
-                <li className="flex items-center gap-3" key={m.id}>
-                  <div className="w-[50px] h-[50px]">
+                <li
+                  className="flex items-center gap-3 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray)  hover:bg-(--white-gray) py-2 px-4 "
+                  key={m.id}
+                >
+                  <div className="w-[35px] h-[35px]">
                     <img src="/assets/chat.svg" alt="profile picture" />
                   </div>
                   <h2 className="flex-1 text-left">{m.username}</h2>
-                  <button className="cursor-pointer" onClick={addContact}>
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => {
+                      addContact(m.id);
+                    }}
+                  >
                     Add contact
                   </button>
                 </li>
               ))}
           </ul>
-          <button onClick={closeModal}>Close</button>
+          <button
+            onClick={closeModal}
+            className="cursor-pointer py-2 px-6 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray) hover:bg-(--white-gray)"
+          >
+            Close
+          </button>
         </div>
       </dialog>
     </div>

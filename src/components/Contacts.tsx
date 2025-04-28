@@ -1,10 +1,32 @@
 import AddContact from "./AddContact";
 
+interface message {
+  id: string;
+  message: string;
+  imageURL: string;
+  time: Date;
+}
+
+interface contact {
+  id: string;
+  username: string;
+  bio: string;
+  profile: string;
+}
+
+interface contacts {
+  id: string;
+  userId: string;
+  contactId: string;
+  Messages: Array<message>;
+  contact: contact;
+}
+
 function Contacts({
   contacts,
   messageBox,
 }: {
-  contacts: Array<object>;
+  contacts: Array<contacts>;
   messageBox: Function;
 }) {
   return (
@@ -26,7 +48,9 @@ function Contacts({
               <div className="flex flex-col">
                 <h2 className="text-lg">{c.contact.username}</h2>
                 <p className="text-(--text-gray) line-clamp-1">
-                  {c.Messages[c.Messages.length - 1].message}
+                  {c.Messages.length > 0
+                    ? c.Messages[c.Messages.length - 1].message
+                    : ""}
                 </p>
               </div>
             </li>
