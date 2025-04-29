@@ -66,7 +66,7 @@ function ChatRoom() {
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
-        <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
+        <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr] overflow-scroll">
           <Contacts contacts={data.data} messageBox={messageBox} />
           <Message
             messages={messages}

@@ -21,8 +21,8 @@ function Message({
     if (messages) {
       if (messages.length > 0) {
         return (
-          <div className="flex flex-col p-3 h-full">
-            <ul className="flex-1 flex flex-col gap-3 pb-3 h-[500px]">
+          <section className="flex flex-col p-3 h-full">
+            <ul className="flex-1 flex flex-col gap-3 pb-3 h-[500px] overflow-scroll">
               {messages.map((m: message) => (
                 <li key={m.id} className="flex flex-col">
                   {m.senderId !== receiver && (
@@ -43,7 +43,7 @@ function Message({
               setRefresh={setRefresh}
               darkTheme={darkTheme}
             />
-          </div>
+          </section>
         );
       } else {
         return (
@@ -63,11 +63,7 @@ function Message({
   }
 
   if (messages) {
-    return (
-      <section>
-        <Chat />
-      </section>
-    );
+    return <Chat />;
   } else {
     return (
       <section className="flex justify-center items-center p-3">
