@@ -72,7 +72,11 @@ function ChatRoom({
           setDarkTheme={setDarkTheme}
         />
         <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
-          <Contacts contacts={data.data} messageBox={messageBox} />
+          <Contacts
+            contacts={data.data}
+            messageBox={messageBox}
+            setRefresh={setRefresh}
+          />
           <Message
             messages={messages}
             receiver={receiverId}

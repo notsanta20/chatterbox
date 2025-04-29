@@ -7,7 +7,7 @@ interface users {
   profile: string | null;
 }
 
-function AddContact() {
+function AddContact({ setRefresh }: { setRefresh: Function }) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [data, setData] = useState<Array<users> | null>(null);
   const url = "http://localhost:3000";
@@ -45,9 +45,15 @@ function AddContact() {
     const data = {
       contactId: id,
     };
-    axios.post(`${url}/contacts`, data, header).catch((err) => {
-      console.log(err.response.data);
-    });
+    axios
+      .post(`${url}/contacts`, data, header)
+      .then(() => {
+        const num = Math.floor(Math.random() * 100);
+        setRefresh(num);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   return (

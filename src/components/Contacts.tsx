@@ -34,9 +34,11 @@ interface contacts {
 function Contacts({
   contacts,
   messageBox,
+  setRefresh,
 }: {
   contacts: Array<contacts>;
   messageBox: Function;
+  setRefresh: Function;
 }) {
   return (
     <section className="flex flex-col gap-2 border-r-2 border-(--light-gray) dark:border-(--dark-gray) p-3">
@@ -44,8 +46,8 @@ function Contacts({
         <ContactList contacts={contacts} messageBox={messageBox} />
       </div>
       <div className="grid grid-cols-2 gap-2 cursor-pointer font-regular">
-        <AddContact />
-        <AddGroup />
+        <AddContact setRefresh={setRefresh} />
+        <AddGroup setRefresh={setRefresh} />
       </div>
     </section>
   );

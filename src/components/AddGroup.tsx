@@ -10,9 +10,9 @@ const schema = z.object({
     .min(2, { message: "Group name must be at least 2 characters" }),
 });
 
-function AddGroup() {
+function AddGroup({ setRefresh }: { setRefresh: Function }) {
   const [data, setData] = useState<Array<object> | null>(null);
-  const [refresh, setRefresh] = useState<number>(0);
+  const [refreshGrp, setRefreshGrp] = useState<number>(0);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const groupDialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -40,7 +40,7 @@ function AddGroup() {
       .catch((err) => {
         console.log(err.response);
       });
-  }, [refresh]);
+  }, [refreshGrp]);
 
   function openModal() {
     if (dialogRef.current) {
@@ -60,7 +60,10 @@ function AddGroup() {
     };
     axios
       .post(`${url}/join-grp`, data, header)
-      .then((res) => {})
+      .then(() => {
+        const num = Math.floor(Math.random() * 100);
+        setRefresh(num);
+      })
       .catch((error) => {
         console.log(error.response);
       });
@@ -83,8 +86,8 @@ function AddGroup() {
     axios
       .post(`${url}/create-grp`, data, header)
       .then((res) => {
-        console.log(res.data);
         const num = Math.floor(Math.random() * 100);
+        setRefreshGrp(num);
         setRefresh(num);
         closeGroupModal();
       })
