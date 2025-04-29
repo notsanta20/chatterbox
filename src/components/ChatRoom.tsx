@@ -5,13 +5,18 @@ import Header from "./Header";
 import Contacts from "./Contacts";
 import Message from "../utils/Message";
 
-function ChatRoom() {
+function ChatRoom({
+  darkTheme,
+  setDarkTheme,
+}: {
+  darkTheme: boolean;
+  setDarkTheme: Function;
+}) {
   const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
   const [refresh, setRefresh] = useState<number>(0);
   const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<Array<object> | null>(null);
-  const [darkTheme, setDarkTheme] = useState<boolean>(true);
 
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
@@ -66,7 +71,7 @@ function ChatRoom() {
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
-        <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr] overflow-scroll">
+        <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
           <Contacts contacts={data.data} messageBox={messageBox} />
           <Message
             messages={messages}

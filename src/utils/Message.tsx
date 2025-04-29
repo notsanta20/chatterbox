@@ -23,8 +23,8 @@ function Message({
     if (messages) {
       if (messages.length > 0) {
         return (
-          <section className="flex flex-col p-3 h-full">
-            <ul className="flex-1 flex flex-col gap-3 pb-3 overflow-y-scroll min-h-0">
+          <section className="flex flex-col p-3 h-full overflow-y-scroll">
+            <ul className="flex-1 flex flex-col gap-3 pb-3 min-h-[0px]">
               {messages.map((m: message) => (
                 <li key={m.id} className="flex flex-col">
                   {m.senderId !== receiver && (
