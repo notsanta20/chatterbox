@@ -50,8 +50,10 @@ function Login() {
   }
 
   return (
-    <main className="bg-black text-white flex flex-col items-center justify-evenly h-screen">
-      <h1 className="text-4xl font-[Gugi] text-center">CHARTER BOX</h1>
+    <main className="bg-black text-white flex flex-col items-center h-screen">
+      <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[30%]">
+        CHARTER BOX
+      </h1>
       <form
         className="flex flex-col gap-4 w-[380px]"
         onSubmit={handleSubmit(onSubmit)}
@@ -67,7 +69,7 @@ function Login() {
             id="username"
             name="username"
             className={
-              "border-2 rounded-4xl py-2 px-4 outline-none " +
+              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
                 ? "border-white"
                 : "border-red-700")
@@ -89,7 +91,7 @@ function Login() {
             id="password"
             name="password"
             className={
-              "border-2 rounded-4xl py-2 px-4 outline-none " +
+              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.password === "undefined"
                 ? "border-white"
                 : "border-red-700")
@@ -101,7 +103,7 @@ function Login() {
               : errors.password.message}
           </div>
         </div>
-        <button className="border-2 border-white rounded-4xl py-2 px-4 my-3 cursor-pointer font-semibold">
+        <button className="border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
           Log In
         </button>
         <h3 className="text-center">

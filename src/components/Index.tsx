@@ -17,7 +17,7 @@ function Index() {
         <h2 className="text-2xl text-center">
           Instant Chats, Endless connections. Start today with Charter Box.
         </h2>
-        <button className="rounded-3xl bg-(--yellow) py-3 px-8 text-xl text-black">
+        <button className="rounded-3xl bg-(--light-yellow) dark:bg-(--dark-yellow) py-3 px-8 text-xl">
           <Link to={"/signup"}>Get Started</Link>
         </button>
       </div>

@@ -65,8 +65,10 @@ function Signup() {
   }
 
   return (
-    <main className="bg-black text-white flex flex-col items-center justify-evenly h-screen ">
-      <h1 className="text-4xl font-[Gugi] text-center">CHARTER BOX</h1>
+    <main className="bg-black text-white flex flex-col items-center h-screen ">
+      <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[30%]">
+        CHARTER BOX
+      </h1>
       <form
         className="flex flex-col gap-4 w-[380px]"
         onSubmit={handleSubmit(onSubmit)}
@@ -82,7 +84,7 @@ function Signup() {
             id="username"
             name="username"
             className={
-              "border-2 rounded-4xl py-2 px-4 outline-none " +
+              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
                 ? "border-white"
                 : "border-red-700")
@@ -104,7 +106,7 @@ function Signup() {
             id="password"
             name="password"
             className={
-              "border-2 rounded-4xl py-2 px-4 outline-none " +
+              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.password === "undefined"
                 ? "border-white"
                 : "border-red-700")
@@ -126,7 +128,7 @@ function Signup() {
             id="confirmPass"
             name="confirmPass"
             className={
-              "border-2 rounded-4xl py-2 px-4 outline-none " +
+              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.confirmPass === "undefined"
                 ? "border-white"
                 : "border-red-700")
@@ -138,7 +140,7 @@ function Signup() {
               : errors.confirmPass.message}
           </div>
         </div>
-        <button className="border-2 border-white rounded-4xl py-2 px-4 my-3 cursor-pointer font-semibold">
+        <button className="border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
           Sign Up
         </button>
         <h3 className="text-center">
