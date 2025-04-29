@@ -1,11 +1,17 @@
 import TextInput from "./TextInput";
 import convertTime from "./convertTime";
 
+interface data {
+  data: Array<message>;
+  userId: string;
+}
+
 interface message {
   id: string;
   senderId: string;
   message: string;
   time: string;
+  sender: object | null;
 }
 
 function Message({
@@ -14,37 +20,44 @@ function Message({
   setRefresh,
   darkTheme,
 }: {
-  messages: Array<message> | null;
+  messages: data | null;
   receiver: string;
   setRefresh: Function;
   darkTheme: boolean;
 }) {
+  const filteredMessages: Array<message> | null = messages
+    ? messages.data
+    : null;
+
   function Chat() {
-    if (messages) {
-      if (messages.length > 0) {
+    if (filteredMessages && messages) {
+      if (filteredMessages.length > 0) {
         return (
-          <section className="flex flex-col p-3 h-full overflow-y-scroll">
-            <ul className="flex-1 flex flex-col gap-3 pb-3 min-h-[0px]">
-              {messages.map((m: message) => (
+          <section className="flex flex-col p-3 h-full overflow-auto">
+            <ul className="flex-1 flex flex-col gap-3 pb-3">
+              {filteredMessages.map((m: message) => (
                 <li key={m.id} className="flex flex-col">
-                  {m.senderId !== receiver && (
+                  {m.senderId === messages.userId && (
                     <div className="self-end flex flex-col items-end gap-2">
-                      <span className="p-4 rounded-2xl bg-(--light-gray) dark:bg-(--dark-gray)">
+                      <span className="p-4 rounded-2xl text-lg bg-(--light-gray) dark:bg-(--dark-gray)">
                         {m.message}
-                      </span>
-                      <span className="text-xs font-medium pr-2">
-                        {convertTime(m.time)}
+                        <span className="text-xs font-medium pl-2">
+                          {convertTime(m.time)}
+                        </span>
                       </span>
                     </div>
                   )}
-                  {m.senderId === receiver && (
+                  {m.senderId !== messages.userId && (
                     <div className="self-start flex flex-col items-start gap-2">
-                      <p className="p-4 rounded-2xl bg-(--light-yellow) dark:bg-(--dark-yellow)">
+                      {m.sender && (
+                        <div className="pl-2"> {m.sender.username}</div>
+                      )}
+                      <p className="p-4 rounded-2xl text-lg bg-(--light-yellow) dark:bg-(--dark-yellow)">
+                        <span className="text-xs font-medium pr-2">
+                          {convertTime(m.time)}
+                        </span>
                         {m.message}
                       </p>
-                      <span className="text-xs font-medium pl-2">
-                        {convertTime(m.time)}
-                      </span>
                     </div>
                   )}
                 </li>
@@ -74,12 +87,12 @@ function Message({
     }
   }
 
-  if (messages) {
+  if (filteredMessages) {
     return <Chat />;
   } else {
     return (
       <section className="flex justify-center items-center p-3">
-        <h2 className="text-xl">Start chatting</h2>
+        <h2 className="text-lg">Start chatting</h2>
       </section>
     );
   }

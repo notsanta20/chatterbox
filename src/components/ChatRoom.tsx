@@ -48,7 +48,7 @@ function ChatRoom({
     axios
       .get(`${newURL}/${newId}`, header)
       .then((res) => {
-        setMessages(res.data.data);
+        setMessages(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +65,7 @@ function ChatRoom({
     navigate("/login", { replace: true });
   } else {
     return (
-      <main className="flex flex-col h-screen">
+      <main className="flex flex-col h-screen w-screen">
         <Header
           setRender={setRefresh}
           darkTheme={darkTheme}

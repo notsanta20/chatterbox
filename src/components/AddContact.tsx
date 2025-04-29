@@ -76,8 +76,10 @@ function AddContact({ setRefresh }: { setRefresh: Function }) {
                   className="flex items-center gap-3 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) py-2 px-4 "
                   key={m.id}
                 >
-                  <div className="w-[35px] h-[35px]">
-                    <img src="/assets/chat.svg" alt="profile picture" />
+                  <div className="w-[45px] h-[45px] bg-(--light-gray) dark:bg-(--dark-gray) rounded-full flex justify-center items-center">
+                    <h2 className=" font-bold text-lg">
+                      {m.username[0].toUpperCase()}
+                    </h2>
                   </div>
                   <h2 className="flex-1 text-left">{m.username}</h2>
                   <button

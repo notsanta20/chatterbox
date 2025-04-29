@@ -35,7 +35,7 @@ function ContactList({
   messageBox: Function;
 }) {
   return (
-    <ul className="flex flex-col gap-2 ">
+    <ul className="flex-1 flex flex-col gap-2">
       {contacts.map((c) => (
         <li
           key={c.contact ? c.contact.id : c.group.id}
@@ -58,7 +58,7 @@ function ContactList({
             <p className="text-(--dark-gray) dark:text-(--light-gray) line-clamp-1">
               {c.Messages.length > 0
                 ? c.Messages[c.Messages.length - 1].message
-                : ""}
+                : "Start chat"}
             </p>
           </div>
         </li>
