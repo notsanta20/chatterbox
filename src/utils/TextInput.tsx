@@ -14,9 +14,11 @@ const schema = z.object({
 function TextInput({
   receiver,
   setRefresh,
+  darkTheme,
 }: {
   receiver: string;
   setRefresh: Function;
+  darkTheme: boolean;
 }) {
   const { register, handleSubmit } = useForm({ resolver: zodResolver(schema) });
   const url = "http://localhost:3000";
@@ -63,10 +65,13 @@ function TextInput({
         type="text"
         name="message"
         id="message"
-        className="rounded-4xl border-1 border-(--text-gray) w-full px-3 py-2 outline-none"
+        className="rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) w-full px-3 py-2 outline-none"
       />
       <button className="w-[30px] h-[30px] absolute top-[5px] right-[5px] cursor-pointer">
-        <img src="/assets/send.svg" alt="send" />
+        <img
+          src={"/assets/" + (darkTheme ? "send.svg" : "send-dark.svg")}
+          alt="send"
+        />
       </button>
     </form>
   );

@@ -45,31 +45,29 @@ function AddContact() {
     const data = {
       contactId: id,
     };
-    axios
-      .post(`${url}/contacts`, data, header)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
+    axios.post(`${url}/contacts`, data, header).catch((err) => {
+      console.log(err.response.data);
+    });
   }
 
   return (
     <div>
-      <button onClick={openModal} className="cursor-pointer">
+      <button
+        onClick={openModal}
+        className="cursor-pointer w-full py-2 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
+      >
         Add Contacts
       </button>
       <dialog
         ref={dialogRef}
-        className="bg-(--mid-gray) text-white border-1 border-(--light-gray) rounded-2xl w-[30vw] h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+        className="bg-white text-balance dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[30vw] h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
         <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
           <ul className="w-full flex-1 flex flex-col gap-3">
             {data &&
               data.map((m) => (
                 <li
-                  className="flex items-center gap-3 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray)  hover:bg-(--white-gray) py-2 px-4 "
+                  className="flex items-center gap-3 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) py-2 px-4 "
                   key={m.id}
                 >
                   <div className="w-[35px] h-[35px]">
@@ -89,7 +87,7 @@ function AddContact() {
           </ul>
           <button
             onClick={closeModal}
-            className="cursor-pointer py-2 px-6 rounded-2xl bg-(--light-gray) border-1 border-(--white-gray) hover:bg-(--white-gray)"
+            className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
           >
             Close
           </button>

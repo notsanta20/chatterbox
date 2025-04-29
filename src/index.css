@@ -1,13 +1,25 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --yellow: #ddd09a;
-  --dark-Yellow: #5b5446;
-  --gray: #1a1a1a;
-  --mid-gray: #242424;
-  --light-gray: #2f2f2f;
+  --dark-yellow: #5b5446;
+  --light-yellow: #c7b58f;
+  --light-gray: #d0d0d0;
+  --dark-gray: #242424;
   --white-gray: #3b3b3b;
   --text-gray: rgba(255, 255, 255, 0.75);
+  --gradient: rgba(59, 59, 59, 1);
+}
+
+html {
+  background-color: white;
+  color: black;
+}
+
+html.dark {
+  background-color: black;
+  color: white;
 }
 
 .gradient-bg {

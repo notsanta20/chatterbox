@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function Index() {
   return (
-    <main className="flex flex-col justify-evenly items-center bg-black text-white h-screen">
+    <main className="flex flex-col justify-evenly items-center h-screen">
       <div className="flex items-center justify-center w-[500px] h-[500px] gradient-bg">
         <div className="flex justify-center items-center w-[400px] h-[400px] rounded-full circle-one">
           <div className="flex justify-center items-center w-[300px] h-[300px] rounded-full circle-two">

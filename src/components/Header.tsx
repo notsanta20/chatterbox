@@ -1,37 +1,68 @@
 import { Link } from "react-router";
 
-function Header({ setRender }: { setRender: Function }) {
+function Header({
+  setRender,
+  darkTheme,
+  setDarkTheme,
+}: {
+  setRender: Function;
+  darkTheme: boolean;
+  setDarkTheme: Function;
+}) {
+  const htmlElement: HTMLHtmlElement | null = document.querySelector(`html`);
+
+  if (htmlElement) {
+    if (darkTheme) {
+      htmlElement.classList.add("dark");
+    } else {
+      htmlElement.classList.remove("dark");
+    }
+  }
+
   function logout() {
     localStorage.setItem("authToken", " ");
     const num = Math.floor(Math.random() * 100);
     setRender(num);
   }
 
+  function handleTheme() {
+    if (darkTheme) {
+      setDarkTheme(false);
+    } else {
+      setDarkTheme(true);
+    }
+  }
+
   return (
-    <header className="flex items-center gap-2 bg-black text-white p-3">
+    <header className="flex items-center gap-2 p-3 border-b-2 border-(--light-gray) dark:border-(--dark-gray)">
       <h1 className="flex-1 text-4xl font-[Gugi]">CHARTER BOX</h1>
-      <div className="flex gap-5">
+      <div className="flex items-center gap-5">
+        <div className="cursor-pointer" onClick={handleTheme}>
+          <img
+            src={"/assets/" + (darkTheme ? "sun.svg" : "moon.svg")}
+            alt="logout"
+            className="w-[30px] h-auto "
+          />
+        </div>
         <div className="cursor-pointer">
           <Link
             to={"/profile"}
             className="flex flex-col justify-center items-center"
           >
             <img
-              src="/assets/user.svg"
+              src={"/assets/" + (darkTheme ? "user.svg" : "user-dark.svg")}
               alt="logout"
               className="w-[30px] h-auto "
             />
-            <div>Profile</div>
           </Link>
         </div>
         <div className="flex flex-col justify-center items-center cursor-pointer">
           <img
-            src="/assets/logout.svg"
+            src={"/assets/" + (darkTheme ? "logout.svg" : "logout-dark.svg")}
             alt="logout"
             onClick={logout}
             className="w-[30px] h-auto "
           />
-          <div>Log out</div>
         </div>
       </div>
     </header>
