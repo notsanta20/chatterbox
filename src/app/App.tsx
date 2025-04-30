@@ -1,31 +1,15 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router";
-import axios from "axios";
 import Index from "../components/Index";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
 import ChatRoom from "../components/chatRoom";
 import Profile from "../components/Profile";
 
-interface user {
-  id: string;
-  username: string;
-  bio: string | null;
-}
-
 function App() {
   const [darkTheme, setDarkTheme] = useState<boolean>(true);
-  const [refresh, setRefresh] = useState<number>(0);
-  const [data, setData] = useState<user | null>(null);
   const htmlElement: HTMLHtmlElement | null = document.querySelector("html");
   const theme = localStorage.getItem("theme");
-
-  const url = "http://localhost:3000";
-  const token = localStorage.getItem("authToken");
-  const Authorization = `Bearer ${token}`;
-  const header = {
-    headers: { Authorization },
-  };
 
   useEffect(() => {
     if (theme) {
@@ -47,15 +31,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${url}/contacts`, header)
-      .then((res) => {
-        setData(res.data.user);
-      })
-      .catch(() => {});
-  }, [refresh]);
-
   return (
     <Routes>
       <Route path="/" element={<Index />} />
@@ -65,12 +40,7 @@ function App() {
         path="/chatroom"
         element={<ChatRoom darkTheme={darkTheme} setDarkTheme={setDarkTheme} />}
       />
-      <Route
-        path="/profile"
-        element={
-          <Profile darkTheme={darkTheme} data={data} setRefresh={setRefresh} />
-        }
-      />
+      <Route path="/profile" element={<Profile darkTheme={darkTheme} />} />
     </Routes>
   );
 }

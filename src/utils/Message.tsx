@@ -48,12 +48,11 @@ function Message({
         return (
           <section
             className={
-              (hide ? "flex" : "hidden") +
-              " flex-1 md:flex flex-col gap-3 h-full"
+              (hide ? "flex" : "hidden") + " flex-1 md:flex flex-col gap-3"
             }
           >
             <div className="flex items-center gap-4 border-b-2 border-(--light-gray) dark:border-(--dark-gray) py-2 px-3">
-              <div onClick={handleHide}>
+              <div onClick={handleHide} className="md:hidden">
                 <img
                   src={"/assets/" + (darkTheme ? "back.svg" : "back-dark.svg")}
                   alt="back"
@@ -69,7 +68,7 @@ function Message({
                 <div className="text-xl">{messages.profileName}</div>
               </div>
             </div>
-            <ul className="flex-1 flex flex-col overflow-auto p-3">
+            <ul className="flex-1 flex flex-col gap-3 p-3">
               {filteredMessages.map((m: message) => (
                 <li key={m.id} className="flex flex-col">
                   {m.senderId === messages.userId && (
@@ -114,7 +113,7 @@ function Message({
             }
           >
             <div className="flex items-center gap-4 border-b-2 border-(--light-gray) dark:border-(--dark-gray) py-2 px-3">
-              <div onClick={handleHide}>
+              <div onClick={handleHide} className="md:hidden">
                 <img
                   src={"/assets/" + (darkTheme ? "back.svg" : "back-dark.svg")}
                   alt="back"

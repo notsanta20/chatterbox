@@ -106,7 +106,7 @@ function AddGroup({ setRefresh }: { setRefresh: Function }) {
       </button>
       <dialog
         ref={dialogRef}
-        className="bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] h-[50vh] md:w-[30vw] md:min-w-[350px]  md:h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+        className="backdrop:bg-black/20 dark:backdrop:bg-white/15 bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] h-[50vh] md:w-[30vw] md:min-w-[350px]  md:h-[50vh] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
         <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
           <button
@@ -149,7 +149,7 @@ function AddGroup({ setRefresh }: { setRefresh: Function }) {
       </dialog>
       <dialog
         ref={groupDialogRef}
-        className="bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] md:w-[30vw] md:min-w-[350px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+        className="backdrop:bg-black/20 dark:backdrop:bg-white/15 bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] md:w-[30vw] md:min-w-[350px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
       >
         <div className="flex flex-col gap-3 items-center h-full p-3 font-normal">
           <form

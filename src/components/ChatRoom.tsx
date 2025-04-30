@@ -53,7 +53,7 @@ function ChatRoom({
         setMessages(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   }, [receiverId, refresh]);
 
