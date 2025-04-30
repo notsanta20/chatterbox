@@ -45,7 +45,7 @@ function Header({
       }
     >
       <h1 className="flex-1 text-2xl md:text-4xl text-center md:text-left font-[Gugi]">
-        CHARTER BOX
+        CHATTERBOX
       </h1>
       <div className="hidden md:flex items-center gap-5">
         <div className="cursor-pointer" onClick={handleTheme}>

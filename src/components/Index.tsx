@@ -10,7 +10,7 @@ function Index() {
           </div>
         </div>
         <h1 className="absolute text-2xl md:text-4xl font-[Gugi] text-center top-(50%) left-(50%)">
-          CHARTER BOX
+          CHATTERBOX
         </h1>
       </div>
       <div className="flex flex-col items-center justify-evenly gap-15 w-[80vw] md:w-[30vw] font-semibold">
