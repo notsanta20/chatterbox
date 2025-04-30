@@ -1,5 +1,5 @@
-import AddContact from "./AddContact";
-import AddGroup from "./AddGroup";
+import AddContact from "../utils/AddContact";
+import AddGroup from "../utils/AddGroup";
 import ContactList from "../utils/ContactList";
 
 interface message {
