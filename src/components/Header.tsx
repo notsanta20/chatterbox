@@ -4,10 +4,12 @@ function Header({
   setRender,
   darkTheme,
   setDarkTheme,
+  hide,
 }: {
   setRender: Function;
   darkTheme: boolean;
   setDarkTheme: Function;
+  hide: boolean;
 }) {
   const htmlElement: HTMLHtmlElement | null = document.querySelector(`html`);
 
@@ -36,7 +38,12 @@ function Header({
   }
 
   return (
-    <header className="flex items-center gap-2 p-3 border-b-2 border-(--light-gray) dark:border-(--dark-gray)">
+    <header
+      className={
+        (hide ? "hidden" : "flex") +
+        " md:flex items-center gap-2 p-3 border-b-2 border-(--light-gray) dark:border-(--dark-gray)"
+      }
+    >
       <h1 className="flex-1 text-2xl md:text-4xl text-center md:text-left font-[Gugi]">
         CHARTER BOX
       </h1>

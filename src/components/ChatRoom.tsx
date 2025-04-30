@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
+import Footer from "./Footer";
 import Contacts from "./Contacts";
 import Message from "../utils/Message";
 
@@ -67,11 +68,12 @@ function ChatRoom({
     navigate("/login", { replace: true });
   } else {
     return (
-      <main className="flex flex-col h-screen w-screen">
+      <main className="flex flex-col h-screen w-screen overflow-auto">
         <Header
           setRender={setRefresh}
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
+          hide={hide}
         />
         <section className="flex-1 flex">
           <Contacts
@@ -89,6 +91,12 @@ function ChatRoom({
             setHide={setHide}
           />
         </section>
+        <Footer
+          setRender={setRefresh}
+          darkTheme={darkTheme}
+          setDarkTheme={setDarkTheme}
+          hide={hide}
+        />
       </main>
     );
   }
