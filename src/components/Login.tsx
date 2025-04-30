@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 interface formData {
   username: string;
@@ -68,6 +69,7 @@ function Login() {
             type="text"
             id="username"
             name="username"
+            placeholder="guest"
             className={
               "border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
@@ -90,6 +92,7 @@ function Login() {
             type="password"
             id="password"
             name="password"
+            placeholder="guest1234"
             className={
               "border-2 border-(--light-gray)  dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.password === "undefined"
@@ -104,7 +107,7 @@ function Login() {
           </div>
         </div>
         <button className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
-          Log In
+          {isSubmitting ? <Oval /> : "Log In"}
         </button>
         <h3 className="text-center">
           Don't have an account ?{" "}

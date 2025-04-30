@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 interface formData {
   username: string;
@@ -141,7 +142,7 @@ function Signup() {
           </div>
         </div>
         <button className="border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
-          Sign Up
+          {isSubmitting ? <Oval /> : "Sign Up"}
         </button>
         <h3 className="text-center">
           Already have an account ?{" "}
