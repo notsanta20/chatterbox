@@ -28,8 +28,10 @@ function Header({
   function handleTheme() {
     if (darkTheme) {
       setDarkTheme(false);
+      localStorage.setItem("theme", "light");
     } else {
       setDarkTheme(true);
+      localStorage.setItem("theme", "dark");
     }
   }
 

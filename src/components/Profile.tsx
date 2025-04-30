@@ -91,7 +91,7 @@ function Profile({
         </div>
       </header>
       <div className="flex-1 flex justify-center items-center">
-        <div className="border-2 border-(--light-gray) dark:border-(--dark-gray) w-[30%] h-[30%] rounded-2xl flex items-center gap-10 p-10">
+        <div className="border-2 border-(--light-gray) dark:border-(--dark-gray) w-[500px] h-[250px] rounded-2xl flex items-center gap-10 p-10">
           <div className="flex justify-center items-center rounded-full bg-(--light-gray) dark:bg-(--dark-gray) w-[100px] h-[100px]">
             <h2 className="text-6xl font-bold">
               {data && data.username[0].toUpperCase()}

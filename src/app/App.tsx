@@ -24,20 +24,25 @@ function App() {
     htmlElement.classList.add("dark");
   }
 
-  if (theme) {
-    if (theme === "light") {
-      if (htmlElement) {
-        htmlElement.classList.remove("dark");
-      }
-    }
-  }
-
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {
     headers: { Authorization },
   };
+
+  useEffect(() => {
+    if (theme) {
+      console.log(theme);
+
+      if (theme === "light") {
+        if (htmlElement) {
+          setDarkTheme(false);
+          htmlElement.classList.remove("dark");
+        }
+      }
+    }
+  }, []);
 
   useEffect(() => {
     axios

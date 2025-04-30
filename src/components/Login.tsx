@@ -50,7 +50,7 @@ function Login() {
   }
 
   return (
-    <main className="bg-black text-white flex flex-col items-center h-screen">
+    <main className="flex flex-col items-center h-screen">
       <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[30%]">
         CHARTER BOX
       </h1>
@@ -69,9 +69,9 @@ function Login() {
             id="username"
             name="username"
             className={
-              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
+              "border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
-                ? "border-white"
+                ? "border-(--light-gray) "
                 : "border-red-700")
             }
           />
@@ -91,9 +91,9 @@ function Login() {
             id="password"
             name="password"
             className={
-              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
+              "border-2 border-(--light-gray)  dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.password === "undefined"
-                ? "border-white"
+                ? "border-(--light-gray) "
                 : "border-red-700")
             }
           />
@@ -103,7 +103,7 @@ function Login() {
               : errors.password.message}
           </div>
         </div>
-        <button className="border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
+        <button className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
           Log In
         </button>
         <h3 className="text-center">

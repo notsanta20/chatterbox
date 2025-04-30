@@ -65,7 +65,7 @@ function Signup() {
   }
 
   return (
-    <main className="bg-black text-white flex flex-col items-center h-screen ">
+    <main className="flex flex-col items-center h-screen ">
       <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[30%]">
         CHARTER BOX
       </h1>
@@ -84,9 +84,9 @@ function Signup() {
             id="username"
             name="username"
             className={
-              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
+              "border-2 border-(--light-gray)  dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.username === "undefined"
-                ? "border-white"
+                ? "border-(--light-gray) "
                 : "border-red-700")
             }
           />
@@ -106,9 +106,9 @@ function Signup() {
             id="password"
             name="password"
             className={
-              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
+              "border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.password === "undefined"
-                ? "border-white"
+                ? "border-(--light-gray) "
                 : "border-red-700")
             }
           />
@@ -128,9 +128,9 @@ function Signup() {
             id="confirmPass"
             name="confirmPass"
             className={
-              "border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
+              "border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 outline-none " +
               (typeof errors.confirmPass === "undefined"
-                ? "border-white"
+                ? "border-(--light-gray)"
                 : "border-red-700")
             }
           />
