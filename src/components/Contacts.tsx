@@ -35,13 +35,22 @@ function Contacts({
   contacts,
   messageBox,
   setRefresh,
+  hide,
+  setHide,
 }: {
   contacts: Array<contacts>;
   messageBox: Function;
   setRefresh: Function;
+  hide: boolean;
+  setHide: Function;
 }) {
   return (
-    <section className="flex flex-col gap-2 border-r-2 border-(--light-gray) dark:border-(--dark-gray) p-3">
+    <section
+      className={
+        (hide ? "hidden" : "flex") +
+        " md:flex flex-col gap-2 w-full md:w-[280px] border-r-2 border-(--light-gray) dark:border-(--dark-gray) p-3"
+      }
+    >
       <div className="flex-1">
         <ContactList contacts={contacts} messageBox={messageBox} />
       </div>

@@ -37,13 +37,15 @@ function Header({
 
   return (
     <header className="flex items-center gap-2 p-3 border-b-2 border-(--light-gray) dark:border-(--dark-gray)">
-      <h1 className="flex-1 text-4xl font-[Gugi]">CHARTER BOX</h1>
-      <div className="flex items-center gap-5">
+      <h1 className="flex-1 text-2xl md:text-4xl text-center md:text-left font-[Gugi]">
+        CHARTER BOX
+      </h1>
+      <div className="hidden md:flex items-center gap-5">
         <div className="cursor-pointer" onClick={handleTheme}>
           <img
             src={"/assets/" + (darkTheme ? "sun.svg" : "moon.svg")}
             alt="logout"
-            className="w-[30px] h-auto "
+            className="w-[30px] h-auto"
           />
         </div>
         <div className="cursor-pointer">

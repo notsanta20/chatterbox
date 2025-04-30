@@ -51,7 +51,7 @@ function Login() {
 
   return (
     <main className="flex flex-col items-center h-screen">
-      <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[30%]">
+      <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[20%] md:h-[30%]">
         CHARTER BOX
       </h1>
       <form

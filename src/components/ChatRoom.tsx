@@ -17,6 +17,7 @@ function ChatRoom({
   const [refresh, setRefresh] = useState<number>(0);
   const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<Array<object> | null>(null);
+  const [hide, setHide] = useState<boolean>(false);
 
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
@@ -57,6 +58,7 @@ function ChatRoom({
 
   function messageBox(id: string) {
     setReceiverId(id);
+    setHide(true);
   }
 
   if (data === null) {
@@ -71,17 +73,20 @@ function ChatRoom({
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
-        <section className="flex-1 grid grid-cols-[minmax(100px,300px)_1fr]">
+        <section className="flex-1 flex">
           <Contacts
             contacts={data.data}
             messageBox={messageBox}
             setRefresh={setRefresh}
+            hide={hide}
           />
           <Message
             messages={messages}
             receiver={receiverId}
             setRefresh={setRefresh}
             darkTheme={darkTheme}
+            hide={hide}
+            setHide={setHide}
           />
         </section>
       </main>

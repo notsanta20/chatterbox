@@ -4,6 +4,7 @@ import convertTime from "./convertTime";
 interface data {
   data: Array<message>;
   userId: string;
+  profileName: string;
 }
 
 interface message {
@@ -11,7 +12,11 @@ interface message {
   senderId: string;
   message: string;
   time: string;
-  sender: object | null;
+  sender: sender | null;
+}
+
+interface sender {
+  username: string;
 }
 
 function Message({
@@ -19,22 +24,52 @@ function Message({
   receiver,
   setRefresh,
   darkTheme,
+  hide,
+  setHide,
 }: {
   messages: data | null;
   receiver: string;
   setRefresh: Function;
   darkTheme: boolean;
+  hide: boolean;
+  setHide: Function;
 }) {
   const filteredMessages: Array<message> | null = messages
     ? messages.data
     : null;
 
+  function handleHide() {
+    setHide(false);
+  }
+
   function Chat() {
     if (filteredMessages && messages) {
       if (filteredMessages.length > 0) {
         return (
-          <section className="flex flex-col p-3 h-full overflow-auto">
-            <ul className="flex-1 flex flex-col gap-3 pb-3">
+          <section
+            className={
+              (hide ? "flex" : "hidden") +
+              " flex-1 md:flex flex-col gap-3 h-full"
+            }
+          >
+            <div className="flex items-center gap-4 border-b-2 border-(--light-gray) dark:border-(--dark-gray) py-2 px-3">
+              <div onClick={handleHide}>
+                <img
+                  src={"/assets/" + (darkTheme ? "back.svg" : "back-dark.svg")}
+                  alt="back"
+                  className="w-[30px] h-auto "
+                />
+              </div>
+              <div className="flex gap-2 items-center">
+                <div className="w-[50px] h-[50px] bg-(--light-gray) dark:bg-(--dark-gray) rounded-full flex justify-center items-center">
+                  <h2 className=" font-semibold text-lg">
+                    {messages.profileName[0].toUpperCase()}
+                  </h2>
+                </div>
+                <div className="text-xl">{messages.profileName}</div>
+              </div>
+            </div>
+            <ul className="flex-1 flex flex-col overflow-auto p-3">
               {filteredMessages.map((m: message) => (
                 <li key={m.id} className="flex flex-col">
                   {m.senderId === messages.userId && (
@@ -72,7 +107,29 @@ function Message({
         );
       } else {
         return (
-          <section className="flex flex-col justify-center p-3 h-full">
+          <section
+            className={
+              (hide ? "flex" : "hidden") +
+              " flex-1 md:flex flex-col justify-center h-full"
+            }
+          >
+            <div className="flex items-center gap-4 border-b-2 border-(--light-gray) dark:border-(--dark-gray) py-2 px-3">
+              <div onClick={handleHide}>
+                <img
+                  src={"/assets/" + (darkTheme ? "back.svg" : "back-dark.svg")}
+                  alt="back"
+                  className="w-[30px] h-auto "
+                />
+              </div>
+              <div className="flex gap-2 items-center">
+                <div className="w-[50px] h-[50px] bg-(--light-gray) dark:bg-(--dark-gray) rounded-full flex justify-center items-center">
+                  <h2 className=" font-semibold text-lg">
+                    {messages.profileName[0].toUpperCase()}
+                  </h2>
+                </div>
+                <div className="text-xl">{messages.profileName}</div>
+              </div>
+            </div>
             <div className="flex-1 flex justify-center items-center">
               <h2 className="">No messages, say Hi.</h2>
             </div>
@@ -91,7 +148,12 @@ function Message({
     return <Chat />;
   } else {
     return (
-      <section className="flex justify-center items-center p-3">
+      <section
+        className={
+          (hide ? "flex" : "hidden") +
+          " md:flex flex-1 justify-center items-center p-3"
+        }
+      >
         <h2 className="text-lg">Start chatting</h2>
       </section>
     );

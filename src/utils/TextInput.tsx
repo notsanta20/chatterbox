@@ -59,7 +59,7 @@ function TextInput({
   }
 
   return (
-    <form className="message relative" onSubmit={handleSubmit(sendMessage)}>
+    <form className="message relative p-3" onSubmit={handleSubmit(sendMessage)}>
       <input
         {...register("message")}
         type="text"
@@ -67,7 +67,7 @@ function TextInput({
         id="message"
         className="rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) w-full px-3 py-2 outline-none"
       />
-      <button className="w-[30px] h-[30px] absolute top-[5px] right-[5px] cursor-pointer">
+      <button className="w-[30px] h-[30px] absolute top-[18px] right-[20px] cursor-pointer">
         <img
           src={"/assets/" + (darkTheme ? "send.svg" : "send-dark.svg")}
           alt="send"

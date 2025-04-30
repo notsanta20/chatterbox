@@ -17,12 +17,8 @@ function App() {
   const [darkTheme, setDarkTheme] = useState<boolean>(true);
   const [refresh, setRefresh] = useState<number>(0);
   const [data, setData] = useState<user | null>(null);
-
   const htmlElement: HTMLHtmlElement | null = document.querySelector("html");
   const theme = localStorage.getItem("theme");
-  if (htmlElement) {
-    htmlElement.classList.add("dark");
-  }
 
   const url = "http://localhost:3000";
   const token = localStorage.getItem("authToken");
@@ -33,13 +29,20 @@ function App() {
 
   useEffect(() => {
     if (theme) {
-      console.log(theme);
-
       if (theme === "light") {
         if (htmlElement) {
           setDarkTheme(false);
           htmlElement.classList.remove("dark");
         }
+      } else {
+        if (htmlElement) {
+          setDarkTheme(true);
+          htmlElement.classList.add("dark");
+        }
+      }
+    } else {
+      if (htmlElement) {
+        htmlElement.classList.add("dark");
       }
     }
   }, []);
@@ -50,9 +53,7 @@ function App() {
       .then((res) => {
         setData(res.data.user);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(() => {});
   }, [refresh]);
 
   return (
