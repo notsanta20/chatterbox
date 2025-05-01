@@ -151,12 +151,12 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
                           : errors.bio.message}
                       </div>
                       <button
-                        className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray) flex justify-center"
+                        className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray) flex justify-center h-[45px]"
                         disabled={isLoading}
                       >
                         {isLoading ? (
                           <Oval
-                            height="30px"
+                            height="25px"
                             color={darkTheme ? "white" : "black"}
                             secondaryColor={darkTheme ? "white" : "black"}
                           />
