@@ -6,6 +6,50 @@ import Contacts from "./Contacts";
 import Message from "../utils/Message";
 import Error from "./Error";
 
+interface data {
+  data: Array<message>;
+  userId: string;
+  profileName: string;
+}
+
+interface sender {
+  username: string;
+}
+
+interface message {
+  id: string;
+  senderId: string;
+  message: string;
+  time: string;
+  sender: sender | null;
+}
+
+interface contactsData {
+  data: Array<contacts>;
+}
+
+interface contacts {
+  id: string;
+  userId: string;
+  contactId: string;
+  Messages: Array<message>;
+  contact: contact | null;
+  group: group;
+}
+
+interface contact {
+  id: string;
+  username: string;
+  bio: string | null;
+  profile: string | null;
+}
+
+interface group {
+  id: string;
+  name: string;
+  profile: string | null;
+}
+
 function ChatRoom({
   darkTheme,
   setDarkTheme,
@@ -13,11 +57,12 @@ function ChatRoom({
   darkTheme: boolean;
   setDarkTheme: Function;
 }) {
-  const [data, setData] = useState<object | null>(null);
+  const [contacts, setContacts] = useState<contactsData | null>(null);
   const [refresh, setRefresh] = useState<number>(0);
   const [receiverId, setReceiverId] = useState<string>("Initial");
-  const [messages, setMessages] = useState<Array<object> | null>(null);
+  const [messages, setMessages] = useState<data | null>(null);
   const [hide, setHide] = useState<boolean>(false);
+  console.log(contacts);
 
   const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");
@@ -38,10 +83,10 @@ function ChatRoom({
     axios
       .get(`${url}/contacts`, header)
       .then((res) => {
-        setData(res.data);
+        setContacts(res.data);
       })
       .catch((error) => {
-        setData(error.data);
+        setContacts(error.data);
         console.error("Unable to fetch contacts");
       });
   }, [refresh]);
@@ -62,26 +107,21 @@ function ChatRoom({
     setHide(true);
   }
 
-  if (data === null) {
+  if (contacts === null) {
     return (
       <h1 className="h-screen flex justify-center items-center text-2xl">
         Loading. . .
       </h1>
     );
-  } else if (typeof data === "undefined") {
+  } else if (typeof contacts === "undefined") {
     return <Error />;
   } else {
     return (
       <main className="flex flex-col h-screen w-screen overflow-auto">
-        <Header
-          setRender={setRefresh}
-          darkTheme={darkTheme}
-          setDarkTheme={setDarkTheme}
-          hide={hide}
-        />
+        <Header darkTheme={darkTheme} setDarkTheme={setDarkTheme} hide={hide} />
         <section className="flex-1 flex">
           <Contacts
-            contacts={data.data}
+            contacts={contacts.data}
             messageBox={messageBox}
             setRefresh={setRefresh}
             hide={hide}

@@ -2,11 +2,16 @@ import AddContact from "../utils/AddContact";
 import AddGroup from "../utils/AddGroup";
 import ContactList from "../utils/ContactList";
 
+interface sender {
+  username: string;
+}
+
 interface message {
   id: string;
+  senderId: string;
   message: string;
-  imageURL: string;
-  time: Date;
+  time: string;
+  sender: sender | null;
 }
 
 interface contact {
@@ -36,13 +41,11 @@ function Contacts({
   messageBox,
   setRefresh,
   hide,
-  setHide,
 }: {
   contacts: Array<contacts>;
   messageBox: Function;
   setRefresh: Function;
   hide: boolean;
-  setHide: Function;
 }) {
   return (
     <section

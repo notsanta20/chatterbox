@@ -1,8 +1,13 @@
+interface sender {
+  username: string;
+}
+
 interface message {
   id: string;
+  senderId: string;
   message: string;
-  imageURL: string;
-  time: Date;
+  time: string;
+  sender: sender | null;
 }
 
 interface contact {

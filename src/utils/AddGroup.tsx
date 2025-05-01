@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
+interface data {
+  id: string;
+  name: string;
+}
+
 const schema = z.object({
   groupName: z
     .string()
@@ -11,7 +16,7 @@ const schema = z.object({
 });
 
 function AddGroup({ setRefresh }: { setRefresh: Function }) {
-  const [data, setData] = useState<Array<object> | null>(null);
+  const [data, setData] = useState<Array<data> | null>(null);
   const [refreshGrp, setRefreshGrp] = useState<number>(0);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const groupDialogRef = useRef<HTMLDialogElement | null>(null);
@@ -82,10 +87,10 @@ function AddGroup({ setRefresh }: { setRefresh: Function }) {
     }
   }
 
-  function onSubmit(data) {
+  function onSubmit(data: object) {
     axios
       .post(`${url}/create-grp`, data, header)
-      .then((res) => {
+      .then(() => {
         const num = Math.floor(Math.random() * 100);
         setRefreshGrp(num);
         setRefresh(num);

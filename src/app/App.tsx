@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import Index from "../components/Index";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
-import ChatRoom from "../components/chatRoom";
+import ChatRoom from "../components/ChatRoom";
 import Profile from "../components/Profile";
 
 function App() {

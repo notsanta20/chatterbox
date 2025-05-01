@@ -1,16 +1,15 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Header({
-  setRender,
   darkTheme,
   setDarkTheme,
   hide,
 }: {
-  setRender: Function;
   darkTheme: boolean;
   setDarkTheme: Function;
   hide: boolean;
 }) {
+  const navigate = useNavigate();
   const htmlElement: HTMLHtmlElement | null = document.querySelector(`html`);
 
   if (htmlElement) {
@@ -23,8 +22,7 @@ function Header({
 
   function logout() {
     localStorage.setItem("authToken", " ");
-    const num = Math.floor(Math.random() * 100);
-    setRender(num);
+    navigate("/login", { replace: true });
   }
 
   function handleTheme() {
