@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import Contacts from "./Contacts";
 import Message from "../utils/Message";
+import Error from "./Error";
 
 function ChatRoom({
   darkTheme,
@@ -13,14 +13,13 @@ function ChatRoom({
   darkTheme: boolean;
   setDarkTheme: Function;
 }) {
-  const navigate = useNavigate();
   const [data, setData] = useState<object | null>(null);
   const [refresh, setRefresh] = useState<number>(0);
   const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<Array<object> | null>(null);
   const [hide, setHide] = useState<boolean>(false);
 
-  const url = "http://localhost:3000";
+  const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {
@@ -43,6 +42,7 @@ function ChatRoom({
       })
       .catch((error) => {
         setData(error.data);
+        console.error("Unable to fetch contacts");
       });
   }, [refresh]);
 
@@ -52,8 +52,8 @@ function ChatRoom({
       .then((res) => {
         setMessages(res.data);
       })
-      .catch((err) => {
-        console.log(err.response);
+      .catch(() => {
+        console.error("Unable to fetch messages");
       });
   }, [receiverId, refresh]);
 
@@ -63,9 +63,13 @@ function ChatRoom({
   }
 
   if (data === null) {
-    return <h1>Loading</h1>;
+    return (
+      <h1 className="h-screen flex justify-center items-center text-2xl">
+        Loading. . .
+      </h1>
+    );
   } else if (typeof data === "undefined") {
-    navigate("/login", { replace: true });
+    return <Error />;
   } else {
     return (
       <main className="flex flex-col h-screen w-screen overflow-auto">

@@ -24,7 +24,7 @@ function AddGroup({ setRefresh }: { setRefresh: Function }) {
     resolver: zodResolver(schema),
   });
 
-  const url = "http://localhost:3000";
+  const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,20 +20,21 @@ const schema = z.object({
     .min(8, { message: "Password must be 8 or more characters long" }),
 });
 
-function Login() {
+function Login({ theme }: { theme: boolean }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
   });
 
   async function onSubmit(data: formData) {
-    const url = "http://localhost:3000";
-
+    const url = "https://chatterbox-api-dbb8.onrender.com";
+    setIsLoading(true);
     axios
       .post(`${url}/login`, data)
       .then((res) => {
@@ -47,6 +49,9 @@ function Login() {
         } else if (message === `password is not matching`) {
           setError("password", { message: message });
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -106,8 +111,19 @@ function Login() {
               : errors.password.message}
           </div>
         </div>
-        <button className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
-          {isSubmitting ? <Oval /> : "Log In"}
+        <button
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold flex justify-center hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Oval
+              height="30px"
+              color={theme ? "white" : "black"}
+              secondaryColor={theme ? "white" : "black"}
+            />
+          ) : (
+            "Log In"
+          )}
         </button>
         <h3 className="text-center">
           Don't have an account ?{" "}

@@ -10,7 +10,7 @@ interface users {
 function AddContact({ setRefresh }: { setRefresh: Function }) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [data, setData] = useState<Array<users> | null>(null);
-  const url = "http://localhost:3000";
+  const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {

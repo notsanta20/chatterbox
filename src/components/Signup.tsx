@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,8 +29,9 @@ const schema = z
     path: ["confirmPass"],
   });
 
-function Signup() {
+function Signup({ theme }: { theme: boolean }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -45,11 +47,12 @@ function Signup() {
     const header = {
       headers: { Authorization },
     };
-    const url = "http://localhost:3000";
+    const url = "https://chatterbox-api-dbb8.onrender.com";
 
     axios
       .post(`${url}/signup`, data, header)
       .then(() => {
+        setIsLoading(true);
         navigate("/login", { replace: true });
       })
       .catch((err) => {
@@ -62,6 +65,9 @@ function Signup() {
             message: "Internal server error, try again",
           });
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -141,8 +147,19 @@ function Signup() {
               : errors.confirmPass.message}
           </div>
         </div>
-        <button className="border-2 dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg(--light-gray) dark:hover:bg-(--dark-gray)">
-          {isSubmitting ? <Oval /> : "Sign Up"}
+        <button
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Oval
+              height="30px"
+              color={theme ? "white" : "black"}
+              secondaryColor={theme ? "white" : "black"}
+            />
+          ) : (
+            "Log In"
+          )}
         </button>
         <h3 className="text-center">
           Already have an account ?{" "}

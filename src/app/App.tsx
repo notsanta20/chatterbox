@@ -34,8 +34,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup theme={darkTheme} />} />
+      <Route path="/login" element={<Login theme={darkTheme} />} />
       <Route
         path="/chatroom"
         element={<ChatRoom darkTheme={darkTheme} setDarkTheme={setDarkTheme} />}

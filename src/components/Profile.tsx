@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 interface user {
   id: string;
@@ -22,6 +23,7 @@ const schema = z.object({
 });
 
 function Profile({ darkTheme }: { darkTheme: boolean }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<user | null>(null);
   const [refresh, setRefresh] = useState<number>(0);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -33,7 +35,7 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
     resolver: zodResolver(schema),
   });
 
-  const url = "http://localhost:3000";
+  const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");
   const Authorization = `Bearer ${token}`;
   const header = {
@@ -62,15 +64,19 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
   }
 
   function editBio(data: bio) {
+    setIsLoading(true);
     axios
       .post(`${url}/bio`, data, header)
       .then(() => {
         const num = Math.floor(Math.random() * 100);
         setRefresh(num);
-        closeModal();
       })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        closeModal();
+        setIsLoading(false);
       });
   }
 
@@ -125,7 +131,7 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
                 </div>
                 <dialog
                   ref={dialogRef}
-                  className="backdrop:bg-black/20 dark:backdrop:bg-white/15 bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] md:w-[50vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+                  className="backdrop:bg-black/20 dark:backdrop:bg-white/15 bg-white text-black dark:bg-black dark:text-white border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl w-[90vw] md:w-[20vw] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                 >
                   <div className="flex flex-col gap-3 items-center h-full p-5 font-normal">
                     <form
@@ -144,8 +150,19 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
                           ? " "
                           : errors.bio.message}
                       </div>
-                      <button className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray)">
-                        Add bio
+                      <button
+                        className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray) flex justify-center"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <Oval
+                            height="30px"
+                            color={darkTheme ? "white" : "black"}
+                            secondaryColor={darkTheme ? "white" : "black"}
+                          />
+                        ) : (
+                          "update bio"
+                        )}
                       </button>
                     </form>
                     <button
