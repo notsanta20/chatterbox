@@ -148,7 +148,7 @@ function Signup({ theme }: { theme: boolean }) {
           </div>
         </div>
         <button
-          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px]"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -158,7 +158,7 @@ function Signup({ theme }: { theme: boolean }) {
               secondaryColor={theme ? "white" : "black"}
             />
           ) : (
-            "Log In"
+            "Sign up"
           )}
         </button>
         <h3 className="text-center">

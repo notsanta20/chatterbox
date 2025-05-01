@@ -62,7 +62,6 @@ function ChatRoom({
   const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<data | null>(null);
   const [hide, setHide] = useState<boolean>(false);
-  console.log(contacts);
 
   const url = "https://chatterbox-api-dbb8.onrender.com";
   const token = localStorage.getItem("authToken");

@@ -35,6 +35,7 @@ function Login({ theme }: { theme: boolean }) {
   async function onSubmit(data: formData) {
     const url = "https://chatterbox-api-dbb8.onrender.com";
     setIsLoading(true);
+
     axios
       .post(`${url}/login`, data)
       .then((res) => {
@@ -112,12 +113,12 @@ function Login({ theme }: { theme: boolean }) {
           </div>
         </div>
         <button
-          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold flex justify-center hover:bg-(--light-gray) dark:hover:bg-(--dark-gray)"
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold flex justify-center hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px]"
           disabled={isLoading}
         >
           {isLoading ? (
             <Oval
-              height="30px"
+              height="25px"
               color={theme ? "white" : "black"}
               secondaryColor={theme ? "white" : "black"}
             />
