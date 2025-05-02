@@ -34,3 +34,4 @@ This app uses Restful APIs to get / post messages,chats and groups. The source c
 ## Acknowledgments
 
 - Inspiration by <a href="https://www.theodinproject.com/lessons/nodejs-messaging-app">The Odin Project</a>
+- Icons <a href="https://heroicons.dev/">Heroicons</a>
