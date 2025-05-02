@@ -59,7 +59,7 @@ function Login({ theme }: { theme: boolean }) {
   return (
     <main className="flex flex-col items-center h-screen">
       <h1 className="text-4xl font-[Gugi] flex justify-center items-center h-[20%] md:h-[30%]">
-        CHARTER BOX
+        CHATTERBOX
       </h1>
       <form
         className="flex flex-col gap-4 w-[380px]"
