@@ -24,7 +24,7 @@ function AddGroup({ setRefresh }: { setRefresh: Function }) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
   });

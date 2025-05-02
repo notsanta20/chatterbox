@@ -36,7 +36,7 @@ function Signup({ theme }: { theme: boolean }) {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
   });

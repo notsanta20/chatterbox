@@ -49,7 +49,7 @@ function TextInput({
 
     axios
       .post(newURL, newData, header)
-      .then((res) => {
+      .then(() => {
         const num = Math.floor(Math.random() * 100);
         setRefresh(num);
       })
