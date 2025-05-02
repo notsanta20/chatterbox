@@ -26,6 +26,7 @@ function Message({
   darkTheme,
   hide,
   setHide,
+  isLoading,
 }: {
   messages: data | null;
   receiver: string;
@@ -33,6 +34,7 @@ function Message({
   darkTheme: boolean;
   hide: boolean;
   setHide: Function;
+  isLoading: boolean;
 }) {
   const filteredMessages: Array<message> | null = messages
     ? messages.data
@@ -141,6 +143,19 @@ function Message({
         );
       }
     }
+  }
+
+  if (isLoading) {
+    return (
+      <section
+        className={
+          (hide ? "flex" : "hidden") +
+          " md:flex flex-1 justify-center items-center p-3"
+        }
+      >
+        <h2 className="text-lg">Loading . . .</h2>
+      </section>
+    );
   }
 
   if (filteredMessages) {

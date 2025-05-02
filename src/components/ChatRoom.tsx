@@ -58,6 +58,7 @@ function ChatRoom({
   setDarkTheme: Function;
 }) {
   const [contacts, setContacts] = useState<contactsData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<number>(0);
   const [receiverId, setReceiverId] = useState<string>("Initial");
   const [messages, setMessages] = useState<data | null>(null);
@@ -91,6 +92,7 @@ function ChatRoom({
   }, [refresh]);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${newURL}/${newId}`, header)
       .then((res) => {
@@ -98,6 +100,9 @@ function ChatRoom({
       })
       .catch(() => {
         console.error("Unable to fetch messages");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [receiverId, refresh]);
 
@@ -132,6 +137,7 @@ function ChatRoom({
             darkTheme={darkTheme}
             hide={hide}
             setHide={setHide}
+            isLoading={isLoading}
           />
         </section>
         <Footer
