@@ -113,7 +113,7 @@ function Login({ theme }: { theme: boolean }) {
           </div>
         </div>
         <button
-          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold flex justify-center hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px]"
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold flex justify-center items-center hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px]"
           disabled={isLoading}
         >
           {isLoading ? (

@@ -48,11 +48,11 @@ function Signup({ theme }: { theme: boolean }) {
       headers: { Authorization },
     };
     const url = "https://chatterbox-api-dbb8.onrender.com";
+    setIsLoading(true);
 
     axios
       .post(`${url}/signup`, data, header)
       .then(() => {
-        setIsLoading(true);
         navigate("/login", { replace: true });
       })
       .catch((err) => {
@@ -148,12 +148,12 @@ function Signup({ theme }: { theme: boolean }) {
           </div>
         </div>
         <button
-          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px]"
+          className="border-2 border-(--light-gray) dark:border-(--dark-gray) rounded-2xl py-2 px-4 my-3 cursor-pointer font-semibold hover:bg-(--light-gray) dark:hover:bg-(--dark-gray) h-[45px] flex justify-center items-center"
           disabled={isLoading}
         >
           {isLoading ? (
             <Oval
-              height="30px"
+              height="25px"
               color={theme ? "white" : "black"}
               secondaryColor={theme ? "white" : "black"}
             />
