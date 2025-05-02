@@ -109,13 +109,13 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
           <div className="border-t-2 md:border-l-2 md:border-t-0 border-(--light-gray) dark:border-(--dark-gray) p-1 md:p-5 justify-self-start w-[90%] h-[150px] md:w-full md:h-full flex flex-1 flex-col justify-around text-lg">
             <div className="flex flex-col gap-2">
               <div className="px-4">Name</div>
-              <h2 className="bg-(--light-gray) dark:bg-(--dark-gray) py-2 px-4 rounded-2xl">
+              <h2 className="bg-(--light-gray) dark:bg-(--dark-gray) py-2 px-4 rounded-2xl h-[45px]">
                 {data && data.username}
               </h2>
             </div>
             <div className="flex flex-col gap-2">
               <div className="px-4">Bio</div>
-              <div className="flex items-center bg-(--light-gray) dark:bg-(--dark-gray) py-2 px-4 rounded-2xl">
+              <div className="flex items-center bg-(--light-gray) dark:bg-(--dark-gray) py-2 px-4 rounded-2xl h-[45px]">
                 <p className="flex-1 line-clamp-2">
                   {data && (data.bio ? data.bio : "Add Bio")}
                 </p>
@@ -151,7 +151,7 @@ function Profile({ darkTheme }: { darkTheme: boolean }) {
                           : errors.bio.message}
                       </div>
                       <button
-                        className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray) flex justify-center h-[45px]"
+                        className="cursor-pointer py-2 px-6 rounded-2xl border-2 border-(--light-gray) dark:border-(--dark-gray) hover:bg-(--white-gray) dark:hover:bg-(--dark-gray) flex justify-center items-center h-[45px]"
                         disabled={isLoading}
                       >
                         {isLoading ? (
