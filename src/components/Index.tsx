@@ -15,7 +15,7 @@ function Index() {
       </div>
       <div className="flex flex-col items-center justify-evenly gap-15 w-[80vw] md:w-[30vw] font-semibold">
         <h2 className="text-2xl text-center">
-          Instant Chats, Endless connections. Start today with Charter Box.
+          Instant Chats, Endless connections. Start today with ChatterBox.
         </h2>
         <button className="rounded-2xl bg-(--light-yellow) dark:bg-(--dark-yellow) py-3 px-8 text-2xl">
           <Link to={"/signup"}>Get Started</Link>
