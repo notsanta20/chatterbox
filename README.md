@@ -1,54 +1,36 @@
-# React + TypeScript + Vite
+<h3 align="center">ChatterBox</h3>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  <p align="center">
+      ChatterBox is a messaging app where you can connect with other users and have group chats. It connects to backend which uses RESTFUL APIs.
+    <br />
+    <a href="https://chatterbox-henna.vercel.app/">Live Demo</a>
+  </p>
+</div>
+<br>
 
-Currently, two official plugins are available:
+<!-- ABOUT THE PROJECT -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Preview
 
-## Expanding the ESLint configuration
+<div align="center">
+<h4 align="center">Home Page</h4>
+ <img src="./public/assets/preview_1.png">
+ <h4 align="center">Chat Room</h4>
+ <img src="./public/assets/preview_2.png">
+<h4 align="center">Create Groups</h4>
+ <img src="./public/assets/preview_3.png">
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### API
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+This app uses Restful APIs to get / post messages,chats and groups. The source code for the API can be found at <a href="https://github.com/notsanta20/chatterbox_api">ChatterBox API</a>
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Built With
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+[![My Skills](https://skillicons.dev/icons?i=html,css,typescript,javascript,react,tailwindcss,vite)](https://skillicons.dev)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+- Inspiration by <a href="https://www.theodinproject.com/lessons/nodejs-messaging-app">The Odin Project</a>
